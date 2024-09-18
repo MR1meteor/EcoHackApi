@@ -4,6 +4,7 @@ using Application.Microservices.MailService;
 using Application.Microservices.MailService.Interfaces;
 using Application.Services;
 using Application.Services.Interfaces;
+using Applizcation.Services;
 using Infrastructure.Dapper;
 using Infrastructure.Dapper.Interfaces;
 using Infrastructure.Repository;
@@ -25,6 +26,7 @@ public static class ApplicationExtensions
         services.AddScoped<IMailService, MailService>();
         services.AddScoped<IFileService, FileService>();
         services.AddScoped<IAuthService, AuthService>();
+        services.AddScoped<IUserService, UserService>();
         services.AddScoped<IRegistrationTokenService, RegistrationTokenService>();
         
         services.AddScoped<IDapperSettings, DapperSettings>();
