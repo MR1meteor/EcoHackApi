@@ -1,0 +1,107 @@
+networks:
+  external:
+    driver: bridge
+  internal:
+    driver: bridge
+  files:
+    driver: bridge
+  postgres:
+    driver: bridge
+
+services:
+  api:
+    build:
+      context: api/
+      dockerfile: Dockerfile
+    networks:
+      - external
+      - internal
+    ports:
+      - "8080:8080"
+    depends_on:
+      - file-service
+      - email-service
+      - database
+      - nginx
+    environment:
+      - ASPNETCORE_ENVIRONMENT=${ENV}
+    restart: always
+    deploy:
+      replicas: 1
+
+  email-service:
+    build:
+      context: email-service
+    networks:
+      - internal
+    ports:
+      - "5100:8080"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=${ENV}
+    restart: always
+    deploy:
+      replicas: 1
+
+  file-service:
+    build:
+      context: file-service
+    ports:
+      - 10002:10002
+    depends_on:
+      - minio
+    networks:
+      - internal
+      - files
+    deploy:
+      replicas: 1
+
+  nginx:
+    image: 'jc21/nginx-proxy-manager:latest'
+    build:
+      context: ./nginx
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    ports:
+      - '80:80' # Public HTTP Port
+      - '443:443' # Public HTTPS Port
+      - '81:81' # Admin Web Port
+    networks:
+      - external
+    volumes:
+      - ./data:/data
+      - ./letsencrypt:/etc/letsencrypt
+
+  minio:
+    image: minio/minio:latest
+    networks:
+      - files
+    ports:
+      - '9000:9000' 
+      - "9099:9099"
+    expose:
+      - "9000"
+    environment:
+      MINIO_ROOT_USER: minio
+      MINIO_ROOT_PASSWORD: minio123
+    volumes:
+      - storage-minio:/data
+    command: server --address ":9099" --console-address ":9000" /data
+    restart: always 
+
+  database:
+    image: postgres:16
+    restart: always
+    environment:
+      POSTGRES_USER: 'postgres'
+      POSTGRES_PASSWORD: 'root'
+      POSTGRES_DB: 'production'
+    networks:
+      - internal
+    ports:
+      - "5432:5432"
+    volumes:
+      - database-pg:/var/lib/postgresql/data
+
+volumes:
+  storage-minio:
+  database-pg:

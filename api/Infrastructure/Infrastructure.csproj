@@ -1,0 +1,56 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net8.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\Domain\Domain.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <PackageReference Include="Dapper" Version="2.1.35" />
+      <PackageReference Include="FluentMigrator" Version="5.2.0" />
+      <PackageReference Include="FluentMigrator.Runner.Postgres" Version="5.2.0" />
+      <PackageReference Include="Microsoft.Extensions.Configuration" Version="8.0.0" />
+      <PackageReference Include="Minio.AspNetCore" Version="6.0.1" />
+      <PackageReference Include="Npgsql" Version="8.0.3" />
+      <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="8.0.2" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <EmbeddedResource Update="Scripts\User\PostgresUser.resx">
+        <Generator>ResXFileCodeGenerator</Generator>
+        <LastGenOutput>PostgresUser.Designer.cs</LastGenOutput>
+      </EmbeddedResource>
+      <EmbeddedResource Update="Scripts\BookElement\PostgresBookElement.resx">
+        <Generator>ResXFileCodeGenerator</Generator>
+        <LastGenOutput>PostgresBookElement.Designer.cs</LastGenOutput>
+      </EmbeddedResource>
+      <EmbeddedResource Update="Scripts\Coordinate\PostgresCoordinate.resx">
+        <Generator>ResXFileCodeGenerator</Generator>
+        <LastGenOutput>PostgresCoordinate.Designer.cs</LastGenOutput>
+      </EmbeddedResource>
+    </ItemGroup>
+
+    <ItemGroup>
+      <Compile Update="Scripts\User\PostgresUser.Designer.cs">
+        <DesignTime>True</DesignTime>
+        <AutoGen>True</AutoGen>
+        <DependentUpon>PostgresUser.resx</DependentUpon>
+      </Compile>
+      <Compile Update="Scripts\BookElement\PostgresBookElement.Designer.cs">
+        <DesignTime>True</DesignTime>
+        <AutoGen>True</AutoGen>
+        <DependentUpon>PostgresBookElement.resx</DependentUpon>
+      </Compile>
+      <Compile Update="Scripts\Coordinate\PostgresCoordinate.Designer.cs">
+        <DesignTime>True</DesignTime>
+        <AutoGen>True</AutoGen>
+        <DependentUpon>PostgresCoordinate.resx</DependentUpon>
+      </Compile>
+    </ItemGroup>
+
+</Project>
