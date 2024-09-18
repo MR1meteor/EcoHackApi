@@ -33,6 +33,10 @@
         <Generator>ResXFileCodeGenerator</Generator>
         <LastGenOutput>PostgresCoordinate.Designer.cs</LastGenOutput>
       </EmbeddedResource>
+      <EmbeddedResource Update="Scripts\RegistrationToken\PostgresRegistrationToken.resx">
+        <Generator>ResXFileCodeGenerator</Generator>
+        <LastGenOutput>PostgresRegistrationToken.Designer.cs</LastGenOutput>
+      </EmbeddedResource>
     </ItemGroup>
 
     <ItemGroup>
@@ -50,6 +54,11 @@
         <DesignTime>True</DesignTime>
         <AutoGen>True</AutoGen>
         <DependentUpon>PostgresCoordinate.resx</DependentUpon>
+      </Compile>
+      <Compile Update="Scripts\RegistrationToken\PostgresRegistrationToken.Designer.cs">
+        <DesignTime>True</DesignTime>
+        <AutoGen>True</AutoGen>
+        <DependentUpon>PostgresRegistrationToken.resx</DependentUpon>
       </Compile>
     </ItemGroup>
 

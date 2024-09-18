@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace email_service.Controllers;
 
 [ApiController]
-[Route("[controller]")]
+[Route("mail")]
 public class MailController(IMailService mailService) : ControllerBase
 {
     [HttpPost("send")]
