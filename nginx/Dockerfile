@@ -1,6 +1,6 @@
 FROM nginx
 
-RUN apk update && apk add openssl
+RUN apt update && apt add openssl
 RUN rm /etc/nginx/conf.d/default.conf && mkdir -p /home/web/www
 
 RUN openssl dhparam -out /etc/ssl/certs/dhparam.pem 2048 &&\
