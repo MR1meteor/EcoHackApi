@@ -13,6 +13,14 @@ public class M0001_AddRegistrationTokens: Migration
             .WithColumn("email").AsString().NotNullable()
             .WithColumn("token").AsGuid().NotNullable()
             .WithColumn("expiration").AsDateTime().NotNullable();
+
+        Alter.Table("book_elements")
+            .AddColumn("reason").AsString().NotNullable()
+            .AddColumn("population").AsString().NotNullable()
+            .AddColumn("family").AsString().NotNullable()
+            .AddColumn("appearance").AsString().NotNullable()
+            .AddColumn("behavior").AsString().NotNullable()
+            .AddColumn("nutrition").AsString().NotNullable();
     }
 
     public override void Down()

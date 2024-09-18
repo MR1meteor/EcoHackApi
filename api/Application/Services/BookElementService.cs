@@ -16,6 +16,12 @@ public class BookElementService(IBookElementRepository bookElementRepository) : 
             Type = data.Type,
             Name = data.Name,
             Description = data.Description,
+            Reason = data.Reason,
+            Population = data.Population,
+            Family = data.Family,
+            Appearance = data.Appearance,
+            Behavior = data.Behavior,
+            Nutrition = data.Nutrition
         });
     }
 
@@ -25,7 +31,13 @@ public class BookElementService(IBookElementRepository bookElementRepository) : 
         {
             Type = data.Type,
             Name = data.Name,
-            Description = data.Description
+            Description = data.Description,
+            Reason = data.Reason,
+            Population = data.Population,
+            Family = data.Family,
+            Appearance = data.Appearance,
+            Behavior = data.Behavior,
+            Nutrition = data.Nutrition
         });
     }
 

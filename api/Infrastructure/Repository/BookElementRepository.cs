@@ -42,7 +42,13 @@ public class BookElementRepository(IDapperContext dapperContext) : IBookElementR
             Id = id,
             Type = data.Type,
             Name = data.Name,
-            Description = data.Description
+            Description = data.Description,
+            Reason = data.Reason,
+            Population = data.Population,
+            Family = data.Family,
+            Appearance = data.Appearance,
+            Behavior = data.Behavior,
+            Nutrition = data.Nutrition
         };
         
         var query = new QueryObject(PostgresBookElement.Update, parameters);
