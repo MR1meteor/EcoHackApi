@@ -1,2 +1,2 @@
-﻿INSERT INTO book_elements (type, name, description)
-VALUES (@Type, @Name, @Description)
+﻿INSERT INTO book_elements (type, name, description, reason, population, family, appearance, behavior, nutrition)
+VALUES (@Type, @Name, @Description, @Reason, @Population, @Family, @Appearance, @Behavior, @Nutrition)
