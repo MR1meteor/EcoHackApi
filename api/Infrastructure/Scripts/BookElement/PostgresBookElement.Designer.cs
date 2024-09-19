@@ -74,8 +74,36 @@ namespace Infrastructure.Scripts.BookElement {
         ///    be.id          as &quot;Id&quot;,
         ///    be.type        as &quot;Type&quot;,
         ///    be.name        as &quot;Name&quot;,
-        ///    be.description as &quot;Description&quot;
-        ///FROM book_elements be
+        ///    be.description as &quot;Description&quot;,
+        ///    be.reason      as &quot;Reason&quot;,
+        ///    be.population  as &quot;Population&quot;,
+        ///    be.family      as &quot;Family&quot;,
+        ///    be.appearance  as &quot;Appearance&quot;,
+        ///    be.behavior    as &quot;Behavior&quot;,
+        ///    be.nutrition   as &quot;Nutrition&quot;,
+        ///    be.status      as &quot;Status&quot;
+        ///FROM book_elements be.
+        /// </summary>
+        internal static string GetAll {
+            get {
+                return ResourceManager.GetString("GetAll", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to SELECT
+        ///    be.id          as &quot;Id&quot;,
+        ///    be.type        as &quot;Type&quot;,
+        ///    be.name        as &quot;Name&quot;,
+        ///    be.description as &quot;Description&quot;,
+        ///    be.reason      as &quot;Reason&quot;,
+        ///    be.population  as &quot;Population&quot;,
+        ///    be.family      as &quot;Family&quot;,
+        ///    be.appearance  as &quot;Appearance&quot;,
+        ///    be.behavior    as &quot;Behavior&quot;,
+        ///    be.nutrition   as &quot;Nutrition&quot;,
+        ///    be.status      as &quot;Status&quot; 
+        ///FROM book_elements be 
         ///WHERE type = @Type.
         /// </summary>
         internal static string GetAllByType {
@@ -89,8 +117,15 @@ namespace Infrastructure.Scripts.BookElement {
         ///    be.id          as &quot;Id&quot;,
         ///    be.type        as &quot;Type&quot;,
         ///    be.name        as &quot;Name&quot;,
-        ///    be.description as &quot;Description&quot;
-        ///FROM book_elements be
+        ///    be.description as &quot;Description&quot;,
+        ///    be.reason      as &quot;Reason&quot;,
+        ///    be.population  as &quot;Population&quot;,
+        ///    be.family      as &quot;Family&quot;,
+        ///    be.appearance  as &quot;Appearance&quot;,
+        ///    be.behavior    as &quot;Behavior&quot;,
+        ///    be.nutrition   as &quot;Nutrition&quot;,
+        ///    be.status      as &quot;Status&quot; 
+        ///FROM book_elements be 
         ///WHERE id = @Id.
         /// </summary>
         internal static string GetById {
@@ -100,8 +135,9 @@ namespace Infrastructure.Scripts.BookElement {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to INSERT INTO book_elements (type, name, description)
-        ///VALUES (@Type, @Name, @Description).
+        ///   Looks up a localized string similar to INSERT INTO book_elements (type, name, description, reason, population, family, appearance, behavior, nutrition, status)
+        ///VALUES (@Type, @Name, @Description, @Reason, @Population, @Family, @Appearance, @Behavior, @Nutrition, @Status)
+        ///RETURNING id as &quot;Id&quot;.
         /// </summary>
         internal static string Insert {
             get {
@@ -114,9 +150,16 @@ namespace Infrastructure.Scripts.BookElement {
         ///    be.id          as &quot;Id&quot;,
         ///    be.type        as &quot;Type&quot;,
         ///    be.name        as &quot;Name&quot;,
-        ///    be.description as &quot;Description&quot;
+        ///    be.description as &quot;Description&quot;,
+        ///    be.reason      as &quot;Reason&quot;,
+        ///    be.population  as &quot;Population&quot;,
+        ///    be.family      as &quot;Family&quot;,
+        ///    be.appearance  as &quot;Appearance&quot;,
+        ///    be.behavior    as &quot;Behavior&quot;,
+        ///    be.nutrition   as &quot;Nutrition&quot;,
+        ///    be.status      as &quot;Status&quot; 
         ///FROM book_elements be
-        ///WHERE be.name like @NameSearch.
+        ///WHERE LOWER(be.name) like LOWER(@NameSearch).
         /// </summary>
         internal static string SearchByName {
             get {
@@ -127,15 +170,24 @@ namespace Infrastructure.Scripts.BookElement {
         /// <summary>
         ///   Looks up a localized string similar to UPDATE book_elements be
         ///SET
-        ///    be.type        = @Type,
-        ///    be.name        = @Name,
-        ///    be.description = @Description
+        ///    type        = @Type,
+        ///    name        = @Name,
+        ///    description = @Description,
+        ///    reason      = @Reason,
+        ///    population  = @Population,
+        ///    family      = @Family,
+        ///    appearance  = @Appearance,
+        ///    behavior    = @Behavior,
+        ///    nutrition   = @Nutrition,
+        ///    status      = @Status
         ///WHERE id = @Id
         ///RETURNING
         ///    be.id          as &quot;Id&quot;,
         ///    be.type        as &quot;Type&quot;,
         ///    be.name        as &quot;Name&quot;,
-        ///    be.description as &quot;Description&quot;.
+        ///    be.description as &quot;Description&quot;,
+        ///    be.reason      as &quot;Reason&quot;,
+        /// [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string Update {
             get {

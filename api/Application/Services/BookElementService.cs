@@ -7,11 +7,11 @@ using Infrastructure.Repository.Interfaces;
 
 namespace Application.Services;
 
-public class BookElementService(IBookElementRepository bookElementRepository) : IBookElementService
+public class BookElementService(IBookElementRepository bookElementRepository, ICoordinatesRepository coordinatesRepository) : IBookElementService
 {
     public async Task CreateAsync(BookElementCreate data)
     {
-        await bookElementRepository.CreateAsync(new BookElementDbCreate
+        var bookElementId = await bookElementRepository.CreateAsync(new BookElementDbCreate
         {
             Type = data.Type,
             Name = data.Name,
@@ -21,13 +21,25 @@ public class BookElementService(IBookElementRepository bookElementRepository) : 
             Family = data.Family,
             Appearance = data.Appearance,
             Behavior = data.Behavior,
-            Nutrition = data.Nutrition
+            Nutrition = data.Nutrition,
+            Status = data.Status
         });
+
+        foreach (var coords in data.Coordinates)
+        {
+            var coordsDbCreate = new CoordinatesDbCreate
+            {
+                ElementId = bookElementId,
+                Coordinates = coords
+            };
+
+            await coordinatesRepository.CreateAsync(coordsDbCreate);
+        }
     }
 
     public async Task<BookElement> UpdateAsync(int id, BookElementUpdate data)
     {
-        return await bookElementRepository.UpdateAsync(id, new BookElementDbUpdate
+        var bookElement = await bookElementRepository.UpdateAsync(id, new BookElementDbUpdate
         {
             Type = data.Type,
             Name = data.Name,
@@ -37,8 +49,24 @@ public class BookElementService(IBookElementRepository bookElementRepository) : 
             Family = data.Family,
             Appearance = data.Appearance,
             Behavior = data.Behavior,
-            Nutrition = data.Nutrition
+            Nutrition = data.Nutrition,
+            Status = data.Status
         });
+        
+        await coordinatesRepository.DeleteByBookElementAsync(bookElement.Id);
+        
+        foreach (var coords in data.Coordinates)
+        {
+            var coordsDbCreate = new CoordinatesDbCreate
+            {
+                ElementId = bookElement.Id,
+                Coordinates = coords
+            };
+
+            await coordinatesRepository.CreateAsync(coordsDbCreate);
+        }
+
+        return bookElement;
     }
 
     public Task DeleteAsync(int id) => 
@@ -47,8 +75,13 @@ public class BookElementService(IBookElementRepository bookElementRepository) : 
     public Task<List<BookElement>> GetAllByType(BookElementType type) => 
         bookElementRepository.GetAllByTypeAsync(type);
 
-    public Task<BookElement?> GetById(int id) => 
-        bookElementRepository.GetByIdAsync(id);
+    public async Task<BookElementGet> GetById(int id)
+    {
+        var bookElementDb = await bookElementRepository.GetByIdAsync(id);
+        var bookElementCoords = await coordinatesRepository.GetAllByElementIdAsync(id);
+
+        return bookElementDb.MapToGetResponse(bookElementCoords.MapToService());
+    }
 
     public async Task<List<BookElement>> SearchByNameAsync(string name)
     {
@@ -58,5 +91,18 @@ public class BookElementService(IBookElementRepository bookElementRepository) : 
         }
 
         return await bookElementRepository.SearchByNameAsync(name);
+    }
+
+    public async Task<List<BookElementGet>> GetAll()
+    {
+        var bookElements = await bookElementRepository.GetAll();
+        var result = new List<BookElementGet>();
+        foreach (var bookElement in bookElements)
+        {
+            var coords = await coordinatesRepository.GetAllByElementIdAsync(bookElement.Id);
+            result.Add(bookElement.MapToGetResponse(coords.MapToService()));
+        }
+
+        return result;
     }
 }

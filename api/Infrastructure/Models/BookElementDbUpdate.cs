@@ -13,4 +13,5 @@ public record BookElementDbUpdate
     public string? Appearance { get; set; }
     public string? Behavior { get; set; }
     public string? Nutrition { get; set; }
+    public string? Status { get; set; }
 }

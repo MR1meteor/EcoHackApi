@@ -9,6 +9,6 @@
     be.appearance  as "Appearance",
     be.behavior    as "Behavior",
     be.nutrition   as "Nutrition",
-    be.status      as "Status" 
-FROM book_elements be 
-WHERE type = @Type
+    be.status      as "Status",
+    be.image_id    as "ImageUrl" 
+FROM book_elements be

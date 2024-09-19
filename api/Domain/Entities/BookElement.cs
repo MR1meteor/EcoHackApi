@@ -14,4 +14,6 @@ public class BookElement
     public string Appearance { get; set; }
     public string Behavior { get; set; }
     public string Nutrition { get; set; }
+    public string Status { get; set; }
+    public string ImageUrl { get; set; }
 }

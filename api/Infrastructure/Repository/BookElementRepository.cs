@@ -3,7 +3,6 @@ using Application.Services.Models;
 using Infrastructure.Dapper;
 using Infrastructure.Dapper.Interfaces;
 using Domain.Entities;
-using Infrastructure.Models;
 using Infrastructure.Repository.Interfaces;
 using Infrastructure.Scripts.BookElement;
 
@@ -29,10 +28,10 @@ public class BookElementRepository(IDapperContext dapperContext) : IBookElementR
         return await dapperContext.ListOrEmpty<BookElement>(queryObject) ?? new List<BookElement>();
     }
 
-    public async Task CreateAsync(BookElementDbCreate data)
+    public async Task<int> CreateAsync(BookElementDbCreate data)
     {
         var query = new QueryObject(PostgresBookElement.Insert, data);
-        await dapperContext.Command<BookElement>(query);
+        return await dapperContext.CommandWithResponse<int>(query);
     }
 
     public Task<BookElement> UpdateAsync(int id, BookElementDbUpdate data)
@@ -60,5 +59,11 @@ public class BookElementRepository(IDapperContext dapperContext) : IBookElementR
     {
         var query = new QueryObject(PostgresBookElement.Delete, new { Id = id });
         await dapperContext.Command<BookElement>(query);
+    }
+
+    public async Task<List<BookElement>> GetAll()
+    {
+        var query = new QueryObject(PostgresBookElement.GetAll, new { });
+        return await dapperContext.ListOrEmpty<BookElement>(query);
     }
 }

@@ -70,6 +70,16 @@ namespace Infrastructure.Scripts.Coordinate {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to DELETE FROM coordinates
+        ///WHERE id = any(@Ids).
+        /// </summary>
+        internal static string DeleteByBookElement {
+            get {
+                return ResourceManager.GetString("DeleteByBookElement", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to SELECT
         ///    c.id          as &quot;Id&quot;,
         ///    c.element_id  as &quot;ElementId&quot;,
@@ -99,7 +109,11 @@ namespace Infrastructure.Scripts.Coordinate {
         
         /// <summary>
         ///   Looks up a localized string similar to INSERT INTO coordinates (element_id, coordinates)
-        ///VALUES (@ElementId, @Coordinates).
+        ///VALUES (@ElementId, @Coordinates)
+        ///RETURNING
+        ///    id          as &quot;Id&quot;,
+        ///    element_id  as &quot;ElementId&quot;,
+        ///    coordinates as &quot;Coordinates&quot;.
         /// </summary>
         internal static string Insert {
             get {
