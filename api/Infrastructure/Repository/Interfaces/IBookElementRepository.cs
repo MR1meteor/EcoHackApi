@@ -13,4 +13,5 @@ public interface IBookElementRepository
     public Task<int> CreateAsync(BookElementDbCreate data);
     public Task<BookElement> UpdateAsync(int id, BookElementDbUpdate data);
     public Task DeleteAsync(int id);
+    public Task<List<BookElement>> GetAll();
 }

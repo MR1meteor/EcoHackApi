@@ -23,7 +23,7 @@ public class BookElementController : ControllerBase
         return Ok();
     }
     
-    [HttpPut("{id:int}")]
+    [HttpPatch("{id:int}")]
     public async Task<IActionResult> UpdateAsync([FromRoute] int id, [FromBody] BookElementUpdate bookElementUpdate)
     {
         return Ok(await _bookElementService.UpdateAsync(id, bookElementUpdate));
@@ -57,5 +57,11 @@ public class BookElementController : ControllerBase
         }
 
         return Ok(await _bookElementService.SearchByNameAsync(name));
+    }
+
+    [HttpGet]
+    public async Task<IActionResult> GetAll()
+    {
+        return Ok(await _bookElementService.GetAll());
     }
 }

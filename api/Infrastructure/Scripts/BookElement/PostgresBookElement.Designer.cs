@@ -81,6 +81,27 @@ namespace Infrastructure.Scripts.BookElement {
         ///    be.appearance  as &quot;Appearance&quot;,
         ///    be.behavior    as &quot;Behavior&quot;,
         ///    be.nutrition   as &quot;Nutrition&quot;,
+        ///    be.status      as &quot;Status&quot;
+        ///FROM book_elements be.
+        /// </summary>
+        internal static string GetAll {
+            get {
+                return ResourceManager.GetString("GetAll", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to SELECT
+        ///    be.id          as &quot;Id&quot;,
+        ///    be.type        as &quot;Type&quot;,
+        ///    be.name        as &quot;Name&quot;,
+        ///    be.description as &quot;Description&quot;,
+        ///    be.reason      as &quot;Reason&quot;,
+        ///    be.population  as &quot;Population&quot;,
+        ///    be.family      as &quot;Family&quot;,
+        ///    be.appearance  as &quot;Appearance&quot;,
+        ///    be.behavior    as &quot;Behavior&quot;,
+        ///    be.nutrition   as &quot;Nutrition&quot;,
         ///    be.status      as &quot;Status&quot; 
         ///FROM book_elements be 
         ///WHERE type = @Type.

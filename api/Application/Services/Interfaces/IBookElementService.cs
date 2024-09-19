@@ -10,6 +10,7 @@ public interface IBookElementService
     Task<BookElement> UpdateAsync(int id, BookElementUpdate data);
     Task DeleteAsync(int id);
     Task<List<BookElement>> GetAllByType(BookElementType type);
-    Task<BookElement?> GetById(int id);
+    Task<BookElementGet> GetById(int id);
     Task<List<BookElement>> SearchByNameAsync(string name);
+    Task<List<BookElementGet>> GetAll();
 }

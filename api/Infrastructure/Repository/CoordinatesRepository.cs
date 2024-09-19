@@ -17,10 +17,11 @@ public class CoordinatesRepository(IDapperContext dapperContext) : ICoordinatesR
         return await dapperContext.FirstOrDefault<Coordinate>(queryObject);
     }
 
-    public async Task<Coordinate?> GetAllByElementIdAsync(int elementId)
+    public async Task<List<DbCoordinates>> GetAllByElementIdAsync(int elementId)
     {
         var queryObject = new QueryObject(PostgresCoordinate.GetByBookElement, new { ElementId = elementId });
-        return await dapperContext.FirstOrDefault<Coordinate>(queryObject);
+        var result = await dapperContext.ListOrEmpty<DbCoordinates>(queryObject);
+        return result;
     }
 
     public Task<DbCoordinates> CreateAsync(CoordinatesDbCreate data)

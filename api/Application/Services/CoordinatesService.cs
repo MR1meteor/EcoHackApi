@@ -37,11 +37,12 @@ public class CoordinatesService(ICoordinatesRepository coordinatesRepository) : 
         await coordinatesRepository.DeleteAsync(id);
     }
 
-    public async Task<Coordinate?> GetAllByElementId(int id)
+    public async Task<List<Coordinate>> GetAllByElementId(int id)
     {
-        return await coordinatesRepository.GetAllByElementIdAsync(id);
+        // return await coordinatesRepository.GetAllByElementIdAsync(id);
+        return new List<Coordinate>();
     }
-
+    
     public async Task<Coordinate?> GetById(int id)
     {
         return await coordinatesRepository.GetByIdAsync(id);

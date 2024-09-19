@@ -75,8 +75,13 @@ public class BookElementService(IBookElementRepository bookElementRepository, IC
     public Task<List<BookElement>> GetAllByType(BookElementType type) => 
         bookElementRepository.GetAllByTypeAsync(type);
 
-    public Task<BookElement?> GetById(int id) => 
-        bookElementRepository.GetByIdAsync(id);
+    public async Task<BookElementGet> GetById(int id)
+    {
+        var bookElementDb = await bookElementRepository.GetByIdAsync(id);
+        var bookElementCoords = await coordinatesRepository.GetAllByElementIdAsync(id);
+
+        return bookElementDb.MapToGetResponse(bookElementCoords.MapToService());
+    }
 
     public async Task<List<BookElement>> SearchByNameAsync(string name)
     {
@@ -86,5 +91,18 @@ public class BookElementService(IBookElementRepository bookElementRepository, IC
         }
 
         return await bookElementRepository.SearchByNameAsync(name);
+    }
+
+    public async Task<List<BookElementGet>> GetAll()
+    {
+        var bookElements = await bookElementRepository.GetAll();
+        var result = new List<BookElementGet>();
+        foreach (var bookElement in bookElements)
+        {
+            var coords = await coordinatesRepository.GetAllByElementIdAsync(bookElement.Id);
+            result.Add(bookElement.MapToGetResponse(coords.MapToService()));
+        }
+
+        return result;
     }
 }

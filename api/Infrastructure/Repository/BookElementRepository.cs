@@ -60,4 +60,10 @@ public class BookElementRepository(IDapperContext dapperContext) : IBookElementR
         var query = new QueryObject(PostgresBookElement.Delete, new { Id = id });
         await dapperContext.Command<BookElement>(query);
     }
+
+    public async Task<List<BookElement>> GetAll()
+    {
+        var query = new QueryObject(PostgresBookElement.GetAll, new { });
+        return await dapperContext.ListOrEmpty<BookElement>(query);
+    }
 }
