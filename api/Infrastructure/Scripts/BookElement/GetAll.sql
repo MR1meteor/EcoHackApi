@@ -9,5 +9,6 @@
     be.appearance  as "Appearance",
     be.behavior    as "Behavior",
     be.nutrition   as "Nutrition",
-    be.status      as "Status"
+    be.status      as "Status",
+    be.image_id    as "ImageId" 
 FROM book_elements be

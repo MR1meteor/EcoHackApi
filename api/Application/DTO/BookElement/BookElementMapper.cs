@@ -32,7 +32,8 @@ public static class BookElementMapper
                 Behavior = element.Behavior,
                 Nutrition = element.Nutrition,
                 Status = element.Status,
-                Coordinates = coords.Select(coords => coords.Coordinates).ToList()
+                Coordinates = coords.Select(coords => coords.Coordinates).ToList(),
+                ImageUrl = element.ImageUrl
             };
     }
 }

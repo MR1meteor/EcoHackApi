@@ -17,4 +17,5 @@ public class BookElementGet
     public string Nutrition { get; set; }
     public string Status { get; set; }
     public List<List<CoordinatesDto>> Coordinates { get; set; }
+    public string ImageUrl { get; set; }
 }

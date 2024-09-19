@@ -25,19 +25,6 @@ public class FileService(ILogger<FileService> logger) : IFileService
         return content;
     }
 
-    public async Task<string> GetLinkById(Guid fileId)
-    {
-        var response = await client.GetAsync($"{BaseUrl}/api/files/{fileId}/link/");
-        var content = await response.Content.ReadAsStringAsync();
-
-        if (!response.IsSuccessStatusCode)
-        {
-            logger.LogError($"Failed to get file link. {content}");
-        }
-
-        return content;
-    }
-
     public async Task<byte[]> DownloadFileAsync(Guid fileId)
     {
         var response = await client.GetAsync($"{BaseUrl}/api/files/{fileId}");
