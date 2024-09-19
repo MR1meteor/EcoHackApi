@@ -20,7 +20,8 @@ public class M0001_AddRegistrationTokens: Migration
             .AddColumn("family").AsString().NotNullable()
             .AddColumn("appearance").AsString().NotNullable()
             .AddColumn("behavior").AsString().NotNullable()
-            .AddColumn("nutrition").AsString().NotNullable();
+            .AddColumn("nutrition").AsString().NotNullable()
+            .AddColumn("status").AsString().NotNullable();
     }
 
     public override void Down()

@@ -20,9 +20,10 @@ public static class ApplicationExtensions
 
         services.AddScoped<IBookElementRepository, BookElementRepository>();
         services.AddScoped<IUserRepository, UserRepository>();
-        services.AddScoped<IBookElementService, BookElementService>();
         services.AddScoped<IRegistrationTokenRepository, RegistrationTokenRepository>();
+        services.AddScoped<ICoordinatesRepository, CoordinatesRepository>();
         
+        services.AddScoped<IBookElementService, BookElementService>();
         services.AddScoped<IMailService, MailService>();
         services.AddScoped<IFileService, FileService>();
         services.AddScoped<IAuthService, AuthService>();
