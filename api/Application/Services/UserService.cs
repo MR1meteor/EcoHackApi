@@ -67,7 +67,7 @@ public class UserService(IUserRepository userRepository) : IUserService
         await userRepository.DeleteAsync(id);
     }
 
-    private async Task<bool> IsRequestUserAdmin(IEnumerable<Claim> claims)
+    public async Task<bool> IsRequestUserAdmin(IEnumerable<Claim> claims)
     {
         var userIdClaim = claims.FirstOrDefault(claim => claim.Type == "UserId");
 

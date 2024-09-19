@@ -11,4 +11,5 @@ public interface IUserService
     public Task<User> CreateAsync(UserDbCreate data, IEnumerable<Claim> requestClaims);
     public Task<User> UpdateAsync(int id, UserDbUpdate data, IEnumerable<Claim> requestClaims);
     public Task DeleteAsync(int id, IEnumerable<Claim> requestClaims);
+    Task<bool> IsRequestUserAdmin(IEnumerable<Claim> claims);
 }
