@@ -10,7 +10,7 @@ public interface IBookElementRepository
     public Task<BookElement?> GetByIdAsync(int id);
     public Task<List<BookElement>> GetAllByTypeAsync(BookElementType type);
     public Task<List<BookElement>> SearchByNameAsync(string name);
-    public Task CreateAsync(BookElementDbCreate data);
+    public Task<int> CreateAsync(BookElementDbCreate data);
     public Task<BookElement> UpdateAsync(int id, BookElementDbUpdate data);
     public Task DeleteAsync(int id);
 }

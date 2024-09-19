@@ -8,6 +8,7 @@
     be.family      as "Family",
     be.appearance  as "Appearance",
     be.behavior    as "Behavior",
-    be.nutrition   as "Nutrition"
+    be.nutrition   as "Nutrition",
+    be.status      as "Status" 
 FROM book_elements be
 WHERE LOWER(be.name) like LOWER(@NameSearch)

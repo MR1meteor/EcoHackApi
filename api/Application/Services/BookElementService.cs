@@ -7,11 +7,11 @@ using Infrastructure.Repository.Interfaces;
 
 namespace Application.Services;
 
-public class BookElementService(IBookElementRepository bookElementRepository) : IBookElementService
+public class BookElementService(IBookElementRepository bookElementRepository, ICoordinatesRepository coordinatesRepository) : IBookElementService
 {
     public async Task CreateAsync(BookElementCreate data)
     {
-        await bookElementRepository.CreateAsync(new BookElementDbCreate
+        var bookElementId = await bookElementRepository.CreateAsync(new BookElementDbCreate
         {
             Type = data.Type,
             Name = data.Name,
@@ -21,8 +21,17 @@ public class BookElementService(IBookElementRepository bookElementRepository) : 
             Family = data.Family,
             Appearance = data.Appearance,
             Behavior = data.Behavior,
-            Nutrition = data.Nutrition
+            Nutrition = data.Nutrition,
+            Status = data.Status
         });
+
+        // foreach (var coords in data.Coordinates)
+        // {
+        //     var coordsDbCreate = new CoordinatesDbCreate
+        //     {
+        //         ElementId = 
+        //     }
+        // }
     }
 
     public async Task<BookElement> UpdateAsync(int id, BookElementUpdate data)

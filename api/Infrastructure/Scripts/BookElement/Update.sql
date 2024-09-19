@@ -8,7 +8,8 @@ SET
     family      = @Family,
     appearance  = @Appearance,
     behavior    = @Behavior,
-    nutrition   = @Nutrition
+    nutrition   = @Nutrition,
+    status      = @Status
 WHERE id = @Id
 RETURNING
     be.id          as "Id",
@@ -20,4 +21,5 @@ RETURNING
     be.family      as "Family",
     be.appearance  as "Appearance",
     be.behavior    as "Behavior",
-    be.nutrition   as "Nutrition"
+    be.nutrition   as "Nutrition",
+    be.status      as "Status"
