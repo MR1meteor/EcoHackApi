@@ -1,4 +1,5 @@
 ﻿using Application.Services.Models;
+using Infrastructure.Models;
 
 namespace Application.DTO.BookElement;
 
@@ -13,4 +14,6 @@ public class BookElementUpdate
     public string Appearance { get; set; }
     public string Behavior { get; set; }
     public string Nutrition { get; set; }
+    public string Status { get; set; }
+    public List<List<CoordinatesDto>> Coordinates { get; set; }
 }

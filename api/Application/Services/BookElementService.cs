@@ -25,18 +25,21 @@ public class BookElementService(IBookElementRepository bookElementRepository, IC
             Status = data.Status
         });
 
-        // foreach (var coords in data.Coordinates)
-        // {
-        //     var coordsDbCreate = new CoordinatesDbCreate
-        //     {
-        //         ElementId = 
-        //     }
-        // }
+        foreach (var coords in data.Coordinates)
+        {
+            var coordsDbCreate = new CoordinatesDbCreate
+            {
+                ElementId = bookElementId,
+                Coordinates = coords
+            };
+
+            await coordinatesRepository.CreateAsync(coordsDbCreate);
+        }
     }
 
     public async Task<BookElement> UpdateAsync(int id, BookElementUpdate data)
     {
-        return await bookElementRepository.UpdateAsync(id, new BookElementDbUpdate
+        var bookElement = await bookElementRepository.UpdateAsync(id, new BookElementDbUpdate
         {
             Type = data.Type,
             Name = data.Name,
@@ -46,8 +49,24 @@ public class BookElementService(IBookElementRepository bookElementRepository, IC
             Family = data.Family,
             Appearance = data.Appearance,
             Behavior = data.Behavior,
-            Nutrition = data.Nutrition
+            Nutrition = data.Nutrition,
+            Status = data.Status
         });
+        
+        await coordinatesRepository.DeleteByBookElementAsync(bookElement.Id);
+        
+        foreach (var coords in data.Coordinates)
+        {
+            var coordsDbCreate = new CoordinatesDbCreate
+            {
+                ElementId = bookElement.Id,
+                Coordinates = coords
+            };
+
+            await coordinatesRepository.CreateAsync(coordsDbCreate);
+        }
+
+        return bookElement;
     }
 
     public Task DeleteAsync(int id) => 

@@ -11,7 +11,13 @@ public class CoordinatesService(ICoordinatesRepository coordinatesRepository) : 
 {
     public async Task<Coordinate> CreateAsync(CoordinatesDbCreate data)
     {
-        return await coordinatesRepository.CreateAsync(data);
+        var dbCoords = await coordinatesRepository.CreateAsync(data);
+        return new Coordinate
+        {
+            Id = dbCoords.Id,
+            ElementId = dbCoords.ElementId,
+            Coordinates = JsonSerializer.Deserialize<List<CoordinatesDto>>(dbCoords.Coordinates)
+        };
     }
 
     public async Task<Coordinate> UpdateAsync(int id, CoordinatesDbUpdate data)
